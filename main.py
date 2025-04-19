@@ -91,7 +91,7 @@ async def update_participation_message(payload):
 
     reactions_map = {
         "✅": [],
-        "🤔": [],
+        "❓": [],
         "❌": [],
         "🚗": [],
     }
@@ -99,21 +99,21 @@ async def update_participation_message(payload):
     for reaction in message.reactions:
         if str(reaction.emoji) in reactions_map:
             users = [user async for user in reaction.users()]
-            reactions_map[str(reaction.emoji)] = [u.mention for u in users if not u.bot]
+            reactions_map[str(reaction.emoji)] = [f"• {u.display_name}" for u in users if not u.bot]
 
     titre = message.channel.name.replace("-", " ").title()
-    lien = tracked_links.get(message.id)
+    lien = tracked_links.get(payload.message_id, "")
 
-        new_content = (
-            f"📅 **Participation au tournoi : {titre}**\n"
-            f"Réagis avec :\n"
-            f"✅ = Je participe\n❓ = À confirmer\n❌ = Je ne viens pas\n🚗 = Je viens en voiture (lift possible)\n\n"
-            f"**✅ Participants :**\n" + "\n".join(reactions_map["✅"]) + "\n\n"
-            f"**❓ À confirmer :**\n" + "\n".join(reactions_map["❓"]) + "\n\n"
-            f"**❌ Ne viennent pas :**\n" + "\n".join(reactions_map["❌"]) + "\n\n"
-            f"**🚗 Proposent un lift :**\n" + "\n".join(reactions_map["🚗"]) + "\n\n"
-            + lien if lien else ""
-        )
+    new_content = (
+        f"📅 **Participation au tournoi : {titre}**\n"
+        f"Réagis avec :\n"
+        f"✅ = Je participe\n❓ = À confirmer\n❌ = Je ne viens pas\n🚗 = Je viens en voiture (lift possible)\n\n"
+        f"**✅ Participants :**\n" + "\n".join(reactions_map["✅"]) + "\n\n"
+        f"**❓ À confirmer :**\n" + "\n".join(reactions_map["❓"]) + "\n\n"
+        f"**❌ Ne viennent pas :**\n" + "\n".join(reactions_map["❌"]) + "\n\n"
+        f"**🚗 Proposent un lift :**\n" + "\n".join(reactions_map["🚗"]) + "\n\n"
+        f"{lien}"
+    )
 
     await message.edit(content=new_content)
 
