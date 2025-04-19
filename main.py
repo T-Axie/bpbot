@@ -3,7 +3,6 @@ from discord.ext import commands, tasks
 import datetime
 import json
 import os
-from keep_alive import keep_alive  # pour Render
 
 # Charger la config via les variables d’environnement
 TOKEN = os.environ['TOKEN']
@@ -189,7 +188,4 @@ async def update_participation_message(payload):
         new_content += f"\n\n🔗 Lien : <{lien}>"
 
     await message.edit(content=new_content)
-
-# Garde Render actif
-keep_alive()
 bot.run(TOKEN)
