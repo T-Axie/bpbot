@@ -104,15 +104,16 @@ async def update_participation_message(payload):
     titre = message.channel.name.replace("-", " ").title()
     lien = tracked_links.get(message.id)
 
-    new_content = (
-        f"**Participation au tournoi : {titre}**\n"
-        f"Réagis avec :\n✅ = Je participe\n🤔 = À confirmer\n❌ = Je ne viens pas\n🚗 = Je viens en voiture (lift possible)\n\n"
-        f"{'[Lien vers l'événement](' + lien + ')\n' if lien else ''}"
-        f"**✅ Participants :**\n" + "\n".join(reactions_map["✅"]) + "\n\n"
-        f"**🤔 À confirmer :**\n" + "\n".join(reactions_map["🤔"]) + "\n\n"
-        f"**❌ Ne viennent pas :**\n" + "\n".join(reactions_map["❌"]) + "\n\n"
-        f"**🚗 Proposent un lift :**\n" + "\n".join(reactions_map["🚗"])
-    )
+        new_content = (
+            f"📅 **Participation au tournoi : {titre}**\n"
+            f"Réagis avec :\n"
+            f"✅ = Je participe\n❓ = À confirmer\n❌ = Je ne viens pas\n🚗 = Je viens en voiture (lift possible)\n\n"
+            f"**✅ Participants :**\n" + "\n".join(reactions_map["✅"]) + "\n\n"
+            f"**❓ À confirmer :**\n" + "\n".join(reactions_map["❓"]) + "\n\n"
+            f"**❌ Ne viennent pas :**\n" + "\n".join(reactions_map["❌"]) + "\n\n"
+            f"**🚗 Proposent un lift :**\n" + "\n".join(reactions_map["🚗"]) + "\n\n"
+            + lien if lien else ""
+        )
 
     await message.edit(content=new_content)
 
