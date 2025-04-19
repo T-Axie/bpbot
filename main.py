@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import datetime
 import os
+import json
 
 # === Charger la config depuis les variables d’environnement ===
 TOKEN = os.getenv("TOKEN")
