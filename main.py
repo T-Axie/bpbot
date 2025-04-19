@@ -3,6 +3,8 @@ from discord.ext import commands, tasks
 import datetime
 import os
 import json
+from keep_alive import keep_alive
+
 
 # === Charger la config depuis les variables d’environnement ===
 TOKEN = os.getenv("TOKEN")
@@ -217,4 +219,5 @@ async def archive_old_tournaments():
             print(f"Archivé : {channel.name}")
 
 
+keep_alive()
 bot.run(TOKEN)
