@@ -4,11 +4,11 @@ import datetime
 import os
 
 # === Charger la config depuis les variables d’environnement ===
-TOKEN = os.getenv("token")
-GUILD_ID = int(os.getenv("guild_id"))
-CATEGORY_TOURNOIS_ID = int(os.getenv("category_tournois_id"))
-CATEGORY_ARCHIVES_ID = int(os.getenv("category_archives_id"))
-PLANNING_CHANNEL_ID = int(os.getenv("planning_channel_id"))
+TOKEN = os.getenv("TOKEN")
+GUILD_ID = int(os.getenv("GUILD_ID"))
+CATEGORY_TOURNOIS_ID = int(os.getenv("CATEGORY_TOURNOIS_ID"))
+CATEGORY_ARCHIVES_ID = int(os.getenv("CATEGORY_ARCHIVES_ID"))
+PLANNING_CHANNEL_ID = int(os.getenv("PLANNING_CHANNEL_ID"))
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
